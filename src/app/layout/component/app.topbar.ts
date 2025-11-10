@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StyleClassModule } from 'primeng/styleclass';
 import { AppConfigurator } from './app.configurator';
 import { LayoutService } from '../service/layout.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-topbar',
@@ -74,7 +75,11 @@ import { LayoutService } from '../service/layout.service';
                     </button>
                     <button type="button" class="layout-topbar-action">
                         <i class="pi pi-user"></i>
-                        <span>Profile</span>
+                        <span>{{ authService.currentUserEmail() || 'Profile' }}</span>
+                    </button>
+                    <button type="button" class="layout-topbar-action" (click)="logout()">
+                        <i class="pi pi-sign-out"></i>
+                        <span>تسجيل خروج</span>
                     </button>
                 </div>
             </div>
@@ -83,10 +88,17 @@ import { LayoutService } from '../service/layout.service';
 })
 export class AppTopbar {
     items!: MenuItem[];
+    authService = inject(AuthService);
+    router = inject(Router);
 
     constructor(public layoutService: LayoutService) {}
 
     toggleDarkMode() {
         this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
+    }
+
+    logout() {
+        this.authService.logout();
+        this.router.navigate(['/auth/login']);
     }
 }

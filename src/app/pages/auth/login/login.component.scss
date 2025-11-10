@@ -1,0 +1,43 @@
+:host ::ng-deep {
+    .p-card .p-card-header {
+        background: linear-gradient(135deg, --p-button-primary-border-color , 0%, #1ab66d 100%);
+        color: #fff;
+        border-radius: 6px 6px 0 0;
+    }
+
+    .p-card .p-card-body {
+        padding: 2rem;
+    }
+
+    .p-card .p-card-footer {
+        background-color: #f8f9fa;
+        border-radius: 0 0 6px 6px;
+        padding: 1rem;
+    }
+
+    .p-inputtext:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+
+    .p-password input {
+        width: 100% !important;
+    }
+
+    /* الزر بعد التعديل المطلوب */
+    .login-submit-btn.p-button {
+        background-color: transparent !important;
+        color: var(--p-button-primary-hover-background) !important; 
+        border: 2px solid var(--p-button-primary-hover-background) !important;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .login-submit-btn.p-button:hover:not(:disabled) {
+        background-color: var(--p-button-primary-hover-background) !important;
+        color: var(--p-button-primary-hover-color, #fff) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+}

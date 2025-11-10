@@ -1,0 +1,50 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100" dir="rtl">
+  <div class="w-full max-w-md">
+    <p-card header="تسجيل الدخول" styleClass="shadow-2xl">
+      <ng-template pTemplate="header">
+        <div class="text-center py-4">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2 dark:text-gray-50">تسجيل الدخول</h2>
+          <p class="text-gray-600 dark:text-gray-400">نظام إدارة الأصول</p>
+        </div>
+      </ng-template>
+
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="space-y-6">
+        <!-- اسم المستخدم -->
+        <div class="space-y-2">
+          <label for="username" class="block text-sm font-medium text-gray-700">
+            اسم المستخدم <span class="text-red-500">*</span>
+          </label>
+          <input pInputText id="username" name="username" [(ngModel)]="credentials.username" required class="w-full" placeholder="أدخل اسم المستخدم" [ngClass]="{ 'ng-invalid ng-dirty': usernameField.invalid && usernameField.touched }" #usernameField="ngModel" />
+          <small *ngIf="usernameField.invalid && usernameField.touched" class="text-red-600">اسم المستخدم مطلوب</small>
+        </div>
+
+        <!-- كلمة المرور -->
+        <div class="space-y-2">
+          <label for="password" class="block text-sm font-medium text-gray-700">
+            كلمة المرور <span class="text-red-500">*</span>
+          </label>
+          <p-password [(ngModel)]="credentials.password" name="password" required placeholder="أدخل كلمة المرور" styleClass="w-full" inputStyleClass="w-full" [feedback]="false" [toggleMask]="true" #passwordField="ngModel"></p-password>
+          <small *ngIf="passwordField.invalid && passwordField.touched" class="text-red-600">كلمة المرور مطلوبة</small>
+        </div>
+
+        <!-- رسالة الخطأ -->
+        <div *ngIf="errorMessage" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+          <div class="flex items-center">
+            <i class="pi pi-exclamation-triangle mr-2"></i>
+            {{ errorMessage }}
+          </div>
+        </div>
+
+        <!-- زر تسجيل الدخول -->
+        <button pButton type="submit" label="تسجيل الدخول" icon="pi pi-sign-in" class="w-full login-submit-btn" [loading]="loading" [disabled]="loginForm.invalid || loading"></button>
+      </form>
+
+      <ng-template pTemplate="footer">
+        <div class="text-center text-sm text-gray-500">
+          <p>© 2024 نظام إدارة الأصول. جميع الحقوق محفوظة.</p>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
+<p-toast></p-toast>
