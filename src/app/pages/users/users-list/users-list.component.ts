@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiClientService, UserDto } from '../../services/api-client.service';
+import { ApiClientService, UserDto } from '../../../services/api-client.service';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, FormsModule, TableModule, ButtonModule, InputTextModule, PaginatorModule, ToggleSwitchModule, ToastModule, DialogModule, RouterModule],
   providers: [MessageService],
-  templateUrl: './users-list/users-list.component.html'
+  templateUrl: './users-list.component.html'
 })
 export class UsersListComponent implements OnInit {
   private api = inject(ApiClientService);

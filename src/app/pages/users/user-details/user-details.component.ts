@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, computed, inject, signal, DestroyRef } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ApiClientService, DataLogDto, UserDto } from '../../services/api-client.service';
+import { ApiClientService, DataLogDto, UserDto } from '../../../services/api-client.service';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
@@ -17,7 +17,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     standalone: true,
     imports: [CommonModule, RouterModule, CardModule, ButtonModule, TagModule, ChartModule, TableModule, ToastModule, ProgressSpinnerModule],
     providers: [MessageService],
-    templateUrl: './user-details/user-details.component.html'
+    templateUrl: './user-details.component.html'
 })
 export class UserDetailsComponent implements OnInit {
     private api = inject(ApiClientService);

@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { Documentation } from './documentation/documentation';
 import { Crud } from './crud/crud';
 import { Empty } from './empty/empty';
-import { UsersListComponent } from './users/users-list.component';
-import { UserDetailsComponent } from './users/user-details.component';
+import { UsersListComponent } from './users/users-list/users-list.component';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
 
 export default [
     { path: 'documentation', component: Documentation },

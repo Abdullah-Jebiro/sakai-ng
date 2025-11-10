@@ -1,0 +1,64 @@
+<div class="flex items-center gap-2 mb-3">
+  <input pInputText type="text" [(ngModel)]="query" placeholder="بحث" class="w-64"/>
+  <button pButton label="بحث" (click)="load()"></button>
+  <span class="flex-1"></span>
+  <button pButton label="جلب للجميع" icon="pi pi-refresh" severity="secondary" (click)="fetchAll()"></button>
+  <button pButton label="إضافة" icon="pi pi-plus" (click)="openCreate()"></button>
+</div>
+
+<p-table [value]="items()" [rows]="pageSize" [paginator]="true" [totalRecords]="total" [lazy]="true"
+         (onLazyLoad)="onPage($event)" [rowsPerPageOptions]="[10,20,50]" [first]="(page-1)*pageSize">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>المعرف</th>
+      <th>الاسم</th>
+      <th>مفعل</th>
+      <th>آخر جلب</th>
+      <th>الحالة</th>
+      <th style="width:220px"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td>{{row.identifier}}</td>
+      <td>{{row.displayName}}</td>
+      <td>
+        <p-toggleSwitch [(ngModel)]="row.isActive" (onChange)="saveActive(row)"></p-toggleSwitch>
+      </td>
+      <td>{{row.lastFetchAt | date:'short'}}</td>
+      <td>{{row.lastFetchStatus}}</td>
+      <td class="flex flex-wrap gap-2">
+        <button pButton icon="pi pi-info-circle" label="تفاصيل" [routerLink]="['/pages', 'users', row.id]"></button>
+        <button pButton icon="pi pi-refresh" label="جلب الآن" (click)="fetch(row)"></button>
+        <button pButton icon="pi pi-trash" severity="danger" (click)="remove(row)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- Dialog: Create User -->
+<p-dialog [(visible)]="createVisible" [modal]="true" [style]="{width:'30rem'}" [draggable]="false" header="إضافة حساب للمراقبة">
+  <div class="flex flex-col gap-3">
+    <div>
+      <label class="block mb-1">المعرف (هاتف/إيميل)</label>
+      <input pInputText class="w-full" [(ngModel)]="createModel.identifier" placeholder="مثال: 0966xxxxxxx"/>
+    </div>
+    <div>
+      <label class="block mb-1">الاسم الظاهر</label>
+      <input pInputText class="w-full" [(ngModel)]="createModel.displayName" placeholder="اختياري"/>
+    </div>
+    <div>
+      <label class="block mb-1">كلمة المرور</label>
+      <input pInputText type="password" class="w-full" [(ngModel)]="createModel.password"/>
+    </div>
+    <div class="flex items-center gap-2">
+      <p-toggleSwitch [(ngModel)]="createModel.isActive"></p-toggleSwitch>
+      <span>تفعيل الجدولة</span>
+    </div>
+
+    <div class="flex justify-end gap-2 mt-3">
+      <button pButton label="إلغاء" severity="secondary" (click)="createVisible=false"></button>
+      <button pButton label="حفظ" icon="pi pi-check" (click)="saveCreate()" [disabled]="!canSaveCreate()" [loading]="saving"></button>
+    </div>
+  </div>
+</p-dialog>
