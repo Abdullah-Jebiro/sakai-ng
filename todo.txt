@@ -1,0 +1,5 @@
+- review current auth service and login component to understand expectations
+- implement auth service methods (login handling, token management, observables)
+- complete login component with form model, submit handler, feedback toast
+- verify template bindings align with component
+- run build or lint command to ensure errors resolved
